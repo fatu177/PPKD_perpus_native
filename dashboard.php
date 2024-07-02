@@ -4,10 +4,10 @@ session_start();
 include 'config/config.php';
 
 // kalo /jika session tidak ada, tolong redirect ke login
-// // if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nama'])) {
 
-// //     header("location:index.php?error=acces-failed");
-// // }
+    header("location:index.php?error=acces-failed");
+}
 
 // $queryPeserta = mysqli_query($koneksi, "SELECT jurusan.nama_jurusan, peserta.* FROM peserta
 // LEFT JOIN jurusan ON jurusan.id = peserta.id_jurusan WHERE deleted = 0

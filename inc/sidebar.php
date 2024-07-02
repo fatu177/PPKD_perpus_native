@@ -38,8 +38,8 @@
                     <h6 class="collapse-header">Master Data:</h6>
                     <a class="collapse-item" href="user.php">Pengguna</a>
                     <a class="collapse-item" href="level.php">Level</a>
-                    <a class="collapse-item" href="jurusan.php">Jurusan</a>
-                    <a class="collapse-item" href="gelombang.php">Gelombang</a>
+                    <a class="collapse-item" href="anggota.php">Anggota</a>
+                    <a class="collapse-item" href="buku.php">Buku</a>
                     <a class="collapse-item" href="pertanyaan_wawancara.php">Pertanyaan Wawancara</a>
                 </div>
             </div>

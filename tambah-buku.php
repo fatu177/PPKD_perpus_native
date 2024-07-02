@@ -8,24 +8,28 @@ if (!isset($_SESSION['nama']))
 
 // jika button disubmit, ambil nilai dari form, nama, email, password
 if (isset($_POST['simpan'])) {
-    $nama_jurusan = $_POST['nama_jurusan'];
+    $nama_buku = $_POST['nama_buku'];
+    $penerbit = $_POST['penerbit'];
+    $genre = $_POST['genre'];
+    $qty = $_POST['qty'];
+    $deskripsi = $_POST['deskripsi'];
+    $penulis = $_POST['penulis'];
 
 
 
     // masukkan ke dalam table user dimana kolom nama di ambil nilainya dari inputan nama 
-    $insertUser = mysqli_query($koneksi, "INSERT INTO
-        jurusan (nama_jurusan)
-        VALUES('$nama_jurusan')");
-    header("location:jurusan.php?notif=tambah-success");
+    $insert = mysqli_query($koneksi, "INSERT INTO
+        buku (nama_buku, penerbit, qty, genre,penulis, deskripsi)
+        VALUES('$nama_buku','$penerbit','$qty','$genre','$penulis','$deskripsi')");
+    header("location:buku.php?notif=tambah-success");
 }
 
 // jika parameter delete ada, buat perintah/query delete
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
 
-    $delete = mysqli_query($koneksi, "DELETE FROM jurusan WHERE id='$id'");
-    header('location:jurusan
-        .php?notif=delete-success');
+    $delete = mysqli_query($koneksi, "DELETE FROM buku WHERE id='$id'");
+    header('location:buku.php?notif=delete-success');
 }
 
 // tampilkan semua data dari tabel user dimana id nya di ambil dari params edit
@@ -33,23 +37,33 @@ if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
 
 
-    $queryEdit = mysqli_query($koneksi, "SELECT * FROM jurusan WHERE id='$id'");
+    $queryEdit = mysqli_query($koneksi, "SELECT * FROM buku WHERE id='$id'");
     $dataEdit  = mysqli_fetch_assoc($queryEdit);
 }
 
 if (isset($_POST['edit'])) {
-    $nama_jurusan = $_POST['nama_jurusan'];
+    $nama_buku = $_POST['nama_buku'];
+    $penerbit = $_POST['penerbit'];
+    $genre = $_POST['genre'];
+    $qty = $_POST['qty'];
+    $deskripsi = $_POST['deskripsi'];
+    $penulis = $_POST['penulis'];
 
     $id = $_GET['edit'];
 
     // ubah data dari table user dimana nilai nama di ambil dari inputan nama 
     // dan nilai id user nya di ambil dari parameter
 
-    $edit = mysqli_query($koneksi, "UPDATE jurusan SET 
-        nama_jurusan='$nama_jurusan'
+    $edit = mysqli_query($koneksi, "UPDATE buku SET 
+        nama_buku='$nama_buku',
+        penerbit='$penerbit',
+        penulis='$penulis',
+        qty='$qty',
+        genre='$genre',
+        deskripsi='$deskripsi'
         WHERE id = '$id'");
 
-    header("location:jurusan.php?edit=berhasil");
+    header("location:buku.php?edit=berhasil");
 }
 ?>
 
@@ -99,23 +113,43 @@ if (isset($_POST['edit'])) {
 
                     <!-- Page Heading -->
                     <?php if (isset($_GET['edit'])) { ?>
-                        <h1 class="h3 mb-4 text-gray-800">Edit Jurusan</h1>
+                        <h1 class="h3 mb-4 text-gray-800">Edit Anggota</h1>
                     <?php } else { ?>
-                        <h1 class="h3 mb-4 text-gray-800">Tambah Jurusan</h1>
+                        <h1 class="h3 mb-4 text-gray-800">Tambah Anggota</h1>
                     <?php } ?>
 
                     <?php if (isset($_GET['edit'])) { ?>
                         <div class="card">
-                            <div class="card-header">Edit Jurusan</div>
+                            <div class="card-header">Edit Anggota`</div>
                             <div class="card-body">
                                 <form action="" method="post">
                                     <div class="mb-3">
-                                        <label for="">Nama Jurusan</label>
-                                        <input value="<?php echo $dataEdit['nama_jurusan'] ?>" type="text" class="form-control" name="nama_jurusan" placeholder="Masukkan Nama Jurusan Anda..">
+                                        <label for="">Nama Buku</label>
+                                        <input value="<?php echo $dataEdit['nama_buku'] ?>" type="text" class="form-control" name="nama_buku" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Penerbit</label>
+                                        <input value="<?php echo $dataEdit['penerbit'] ?>" type="text" class="form-control" name="penerbit" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Penulis</label>
+                                        <input value="<?php echo $dataEdit['penulis'] ?>" type="text" class="form-control" name="penulis" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Qty</label>
+                                        <input value="<?php echo $dataEdit['qty'] ?>" type="number" class="form-control" name="qty" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Genre</label>
+                                        <input value="<?php echo $dataEdit['genre'] ?>" type="text" class="form-control" name="genre" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Deskripsi</label>
+                                        <input value="<?php echo $dataEdit['deskripsi'] ?>" type="text" class="form-control" name="deskripsi" placeholder="Masukkan Nama Jurusan Anda..">
                                     </div>
                                     <div class="mb-3">
                                         <input type="submit" class="btn btn-primary" name="edit" value="Ubah">
-                                        <a href="user.php" class="btn btn-danger">Kembali</a>
+                                        <a href="anggota.php" class="btn btn-danger">Kembali</a>
                                     </div>
                                 </form>
                             </div>
@@ -126,8 +160,28 @@ if (isset($_POST['edit'])) {
                             <div class="card-body">
                                 <form action="" method="post">
                                     <div class="mb-3">
-                                        <label for="">Nama Jurusan</label>
-                                        <input type="text" class="form-control" name="nama_jurusan" placeholder="Masukkan Nama Jurusan Anda..">
+                                        <label for="">Nama Buku</label>
+                                        <input type="text" class="form-control" name="nama_buku" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Penerbit</label>
+                                        <input type="text" class="form-control" name="penerbit" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Penulis</label>
+                                        <input type="text" class="form-control" name="penulis" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Qty</label>
+                                        <input type="number" class="form-control" name="qty" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Genre</label>
+                                        <input type="text" class="form-control" name="genre" placeholder="Masukkan Nama Jurusan Anda..">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Deskripsi</label>
+                                        <input type="text" class="form-control" name="deskripsi" placeholder="Masukkan Nama Jurusan Anda..">
                                     </div>
                                     <div class="mb-3">
                                         <input type="submit" class="btn btn-primary" name="simpan" value="Simpan">

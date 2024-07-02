@@ -6,7 +6,7 @@ if (!isset($_SESSION['nama']))
     header("location:index.php?error=acces-failed");
 
 
-$queryJurusan = mysqli_query($koneksi, "SELECT * FROM jurusan ORDER BY id DESC");
+$query = mysqli_query($koneksi, "SELECT * FROM anggota ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -41,9 +41,9 @@ $queryJurusan = mysqli_query($koneksi, "SELECT * FROM jurusan ORDER BY id DESC")
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Data Jurusan</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Data Anggota</h1>
                     <div align="right">
-                        <a href="tambah-jurusan.php" class="btn btn-primary mb-3">Tambah Jurusan</a>
+                        <a href="tambah-anggota.php" class="btn btn-primary mb-3">Tambah Anggota</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="datatables">
@@ -56,13 +56,13 @@ $queryJurusan = mysqli_query($koneksi, "SELECT * FROM jurusan ORDER BY id DESC")
                             </thead>
                             <tbody>
                                 <?php $no = 1;
-                                while ($dataJurusan = mysqli_fetch_assoc($queryJurusan)) { ?>
+                                while ($row = mysqli_fetch_assoc($query)) { ?>
                                     <tr>
                                         <td><?php echo $no++ ?> </td>
-                                        <td><?php echo $dataJurusan['nama_jurusan'] ?></td>
+                                        <td><?php echo $row['nama_anggota'] ?></td>
                                         <td>
-                                            <a href="tambah-jurusan.php?edit=<?php echo $dataJurusan['id'] ?>" class="btn btn-primary btn-sm">Edit</a>
-                                            <a onclick="return confirm('Apakah anda yakin akan menghapus data ini??')" href="tambah-jurusan.php?delete=<?php echo $dataJurusan['id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                                            <a href="tambah-anggota.php?edit=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm">Edit</a>
+                                            <a onclick="return confirm('Apakah anda yakin akan menghapus data ini??')" href="tambah-anggota.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
