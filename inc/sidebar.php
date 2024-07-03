@@ -58,12 +58,12 @@
     <li class="nav-item ">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Data Peserta</span>
+            <span>Transaksi</span>
         </a>
         <div id="collapsePages" class="collapse " aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Data Peserta:</h6>
-                <a class="collapse-item" href="peserta.php">Peserta</a>
+                <h6 class="collapse-header">Transaksi:</h6>
+                <a class="collapse-item" href="peminjaman.php">Pinjam Buku</a>
 
             </div>
         </div>
