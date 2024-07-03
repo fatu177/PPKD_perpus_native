@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2024 at 09:20 AM
+-- Generation Time: Jul 03, 2024 at 03:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,52 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_perpus`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anggota`
+--
+
+CREATE TABLE `anggota` (
+  `id` int(11) NOT NULL,
+  `nama_anggota` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `no_tlp` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `buku`
+--
+
+CREATE TABLE `buku` (
+  `id` int(11) NOT NULL,
+  `nama_buku` varchar(50) NOT NULL,
+  `penerbit` varchar(50) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `penulis` varchar(100) NOT NULL,
+  `genre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_peminjam`
+--
+
+CREATE TABLE `detail_peminjam` (
+  `id` int(11) NOT NULL,
+  `id_peminjam` int(11) NOT NULL,
+  `id_buku` int(11) NOT NULL,
+  `tanggal_pinjam` datetime NOT NULL,
+  `tanggal_pengembalian` datetime NOT NULL,
+  `keterangan` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -41,6 +87,20 @@ INSERT INTO `level` (`id`, `nama_level`, `keterangan`) VALUES
 (1, 'Administrator', ''),
 (2, 'Operator', ''),
 (3, 'Kepsek', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `peminjam`
+--
+
+CREATE TABLE `peminjam` (
+  `id` int(11) NOT NULL,
+  `id_anggota` int(11) NOT NULL,
+  `no_transaksi` varchar(30) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -70,9 +130,27 @@ INSERT INTO `user` (`id`, `id_level`, `nama`, `email`, `password`) VALUES
 --
 
 --
+-- Indexes for table `anggota`
+--
+ALTER TABLE `anggota`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `detail_peminjam`
+--
+ALTER TABLE `detail_peminjam`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `level`
 --
 ALTER TABLE `level`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `peminjam`
+--
+ALTER TABLE `peminjam`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -86,10 +164,28 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `anggota`
+--
+ALTER TABLE `anggota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `detail_peminjam`
+--
+ALTER TABLE `detail_peminjam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `peminjam`
+--
+ALTER TABLE `peminjam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
